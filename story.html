@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Story Behind Tenant's Voice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root, [data-theme="light"] {
+            --bg-primary: #f9fafb; --bg-secondary: #f3f4f6; --text-primary: #111827;
+            --text-secondary: #6b7280; --border-primary: #e5e7eb; --accent-primary: #3b82f6;
+            --accent-bg: #2563eb;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb;
+            --text-secondary: #9ca3af; --border-primary: #374151; --accent-primary: #60a5fa;
+            --accent-bg: #3b82f6;
+        }
+        body {
+            font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .prose { color: var(--text-secondary); }
+        .prose h2 { color: var(--text-primary); }
+        .prose a { color: var(--accent-primary); }
+        .lightbox-trigger { cursor: zoom-in; }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 md:p-8">
+         <header class="flex justify-between items-center mb-8 pb-4 border-b" style="border-color: var(--border-primary);">
+            <h1 class="text-3xl font-bold">The Story Behind the Tool</h1>
+            <div class="flex items-center gap-4">
+                 <div id="theme-switcher" class="flex items-center p-1 rounded-full" style="background-color: var(--bg-secondary);">
+                    <button id="light-theme-btn" class="p-2 rounded-full leading-none transition-colors"><i class="fas fa-sun"></i></button>
+                    <button id="dark-theme-btn" class="p-2 rounded-full leading-none transition-colors"><i class="fas fa-moon"></i></button>
+                </div>
+                <a href="index.html" class="hover:underline transition" style="color: var(--accent-primary);">&larr; Back to the tool</a>
+            </div>
+        </header>
+
+        <main class="max-w-4xl mx-auto prose lg:prose-xl">
+            <section class="mb-12">
+                <h2>The Story Behind This Tool</h2>
+                <p>Like many renters, I have had negative experiences with landlords. For years, I lacked the information and confidence to challenge unfair situations. That changed when a landlord tried to deduct £2,625 from my girlfriend's tenancy deposit.</p>
+                <p>We decided to contest it. I used Google's NotebookLM and uploaded official UK tenancy law documents to help guide our response. Using the information it provided about "fair wear and tear" and "betterment," we drafted a rebuttal to the landlord's claims.</p>
+            </section>
+
+            <section>
+                <h2>From a Personal Case to a Public Tool</h2>
+                <p>The result was a success: the Tenancy Deposit Scheme (TDS) returned £2,350 of the £2,625 claimed. This outcome showed that with the right information, tenants can effectively defend their position without paying for advice.</p>
+                <p>This experience led me to want to share what I'd learned. However, I encountered two problems. First, people were hesitant to trust a general-purpose tool for specific legal matters. Second, I found that NotebookLM could pull information from incorrect sources. For something this important, the information must be accurate.</p>
+                <p>This is why I built Tenant's Voice. There are good and bad landlords, and this tool is for dealing with the latter. It was created to be a dedicated and reliable platform for tenants to help them understand their rights, speak up, and contest situations where appropriate. During its development, I traded off some speed of output for accuracy to make sure this is a platform Tenants going though issues could rely on.</p>
+                <p>This tool is the result of that journey. It's for you, and it is for free. If you have feedback, please reach out. I also appreciate hearing about successful outcomes.</p>
+                <p>And if you have a great outcome, I'd love to hear about it. Hearing the wins makes my day.</p>
+                <p>All the best,</p>
+                <p>Oscar</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 not-prose">
+                    <figure class="bg-card p-4 rounded-lg shadow-lg">
+                        <img src="https://res.cloudinary.com/dnnoas1ri/image/upload/v1759428347/TDS_Outcome1_d02xmn.png" alt="Official TDS outcome awarding £2,354 back to the tenant." class="rounded-md w-full mb-3 lightbox-trigger">
+                        <figcaption class="text-sm text-center font-semibold" style="color: var(--text-primary);">Official TDS Outcome</figcaption>
+                        <p class="text-xs text-center mt-1" style="color: var(--text-secondary);">The final adjudication result showing a 90% success rate against the landlord's claim.</p>
+                    </figure>
+
+                    <figure class="bg-card p-4 rounded-lg shadow-lg">
+                        <img src="https://res.cloudinary.com/dnnoas1ri/image/upload/v1759428347/TDS_Tenancyoutcomefindings2_tudvpr.png" alt="Detailed legal findings from the adjudicator." class="rounded-md w-full mb-3 lightbox-trigger">
+                        <figcaption class="text-sm text-center font-semibold" style="color: var(--text-primary);">Detailed Legal Findings</figcaption>
+                        <p class="text-xs text-center mt-1" style="color: var(--text-secondary);">The adjudicator's reasoning, highlighting "fair wear and tear" to counter inflated claims.</p>
+                    </figure>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- THEME SWITCHER LOGIC ---
+        const lightThemeBtn = document.getElementById('light-theme-btn');
+        const darkThemeBtn = document.getElementById('dark-theme-btn');
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                darkThemeBtn.style.backgroundColor = 'var(--accent-bg)'; darkThemeBtn.style.color = 'white';
+                lightThemeBtn.style.backgroundColor = 'transparent'; lightThemeBtn.style.color = 'var(--text-secondary)';
+            } else {
+                lightThemeBtn.style.backgroundColor = 'var(--accent-bg)'; lightThemeBtn.style.color = 'white';
+                darkThemeBtn.style.backgroundColor = 'transparent'; darkThemeBtn.style.color = 'var(--text-secondary)';
+            }
+        }
+        lightThemeBtn.addEventListener('click', () => applyTheme('light'));
+        darkThemeBtn.addEventListener('click', () => applyTheme('dark'));
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) { applyTheme(savedTheme); } else if (prefersDark) { applyTheme('dark'); } else { applyTheme('light'); }
+
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox) {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const images = document.querySelectorAll('.lightbox-trigger');
+            const imageUrls = Array.from(images).map(img => img.src);
+            let currentIndex = 0;
+            const showImage = (index) => {
+                if (index >= 0 && index < imageUrls.length) {
+                    lightboxImg.src = imageUrls[index];
+                    currentIndex = index;
+                    lightbox.classList.remove('hidden');
+                }
+            };
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => showImage(index));
+            });
+            const closeLightbox = () => lightbox.classList.add('hidden');
+            const showPrev = () => showImage((currentIndex - 1 + imageUrls.length) % imageUrls.length);
+            const showNext = () => showImage((currentIndex + 1) % imageUrls.length);
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxPrev.addEventListener('click', showPrev);
+            lightboxNext.addEventListener('click', showNext);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('hidden')) {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') showPrev();
+                    if (e.key === 'ArrowRight') showNext();
+                }
+            });
+        }
+    </script>
+
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 hidden">
+        <button id="lightbox-close" class="absolute top-4 right-6 text-white text-4xl font-bold hover:text-gray-400 transition">&times;</button>
+        <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-400 transition">&#8249;</button>
+        <img id="lightbox-img" src="" alt="Enlarged TDS document" class="max-w-full max-h-full">
+        <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-4xl font-bold hover:text-gray-400 transition">&#8250;</button>
+    </div>
+
+</body>
+</html>

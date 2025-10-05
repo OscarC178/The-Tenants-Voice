@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant's Voice - Free Tenancy Guidance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root, [data-theme="light"] {
+            --bg-primary: #f9fafb; --bg-secondary: #f3f4f6; --text-primary: #111827;
+            --text-secondary: #6b7280; --border-primary: #e5e7eb; --accent-primary: #3b82f6;
+            --accent-bg: #2563eb;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #111827; --bg-secondary: #1f2937; --text-primary: #f9fafb;
+            --text-secondary: #9ca3af; --border-primary: #374151; --accent-primary: #60a5fa;
+            --accent-bg: #3b82f6;
+        }
+        body {
+            font-family: 'Inter', sans-serif; background-color: var(--bg-primary); color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .bg-card { background-color: var(--bg-secondary); }
+        .bg-primary { background-color: var(--bg-primary); }
+        .text-main { color: var(--text-primary); }
+        .text-subtle { color: var(--text-secondary); }
+        .border-main { border-color: var(--border-primary); }
+        .accent-text { color: var(--accent-primary); }
+        .accent-bg { background-color: var(--accent-bg); }
+        .chat-bubble-user { background-color: #0d9488; }
+        .chat-bubble-ai { background-color: #374151; }
+        #loader-spinner { border-top-color: var(--accent-primary); -webkit-animation: spin 1s linear infinite; animation: spin 1s linear infinite; }
+        @-webkit-keyframes spin { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .feedback-btn:hover { color: var(--accent-primary); }
+    </style>
+</head>
+<body class="bg-primary text-main">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="flex justify-between items-center mb-8 pb-4 border-b border-main">
+            <h1 class="text-3xl font-bold text-main">Tenant's Voice</h1>
+            <div class="flex items-center gap-4">
+                 <div id="theme-switcher" class="flex items-center p-1 rounded-full bg-card">
+                    <button id="light-theme-btn" class="p-2 rounded-full leading-none transition-colors"><i class="fas fa-sun"></i></button>
+                    <button id="dark-theme-btn" class="p-2 rounded-full leading-none transition-colors"><i class="fas fa-moon"></i></button>
+                </div>
+                <a href="story.html" class="accent-text hover:underline transition">Why I built this &rarr;</a>
+            </div>
+        </header>
+        
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-card p-6 rounded-2xl text-center">
+                    <i class="fas fa-magic-wand-sparkles text-3xl accent-text mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">AI-Powered Guidance</h3>
+                    <p class="text-sm text-subtle">Get instant, clear advice on your tenancy issues, grounded in reliable sources.</p>
+                </div>
+                <div class="bg-card p-6 rounded-2xl text-center">
+                    <i class="fas fa-building-columns text-3xl accent-text mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Local Council Information</h3>
+                    <p class="text-sm text-subtle">Enter your postcode to get linked to your local council for official support.</p>
+                </div>
+                 <div class="bg-card p-6 rounded-2xl text-center">
+                    <i class="fas fa-file-signature text-3xl accent-text mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">Dynamic Document Drafting</h3>
+                    <p class="text-sm text-subtle">Instantly generate draft emails and dispute messages based on your specific situation.</p>
+                </div>
+                 <div class="bg-card p-6 rounded-2xl text-center">
+                    <i class="fas fa-shield-halved text-3xl accent-text mb-4"></i>
+                    <h3 class="font-bold text-lg mb-2">100% Free and Anonymous</h3>
+                    <p class="text-sm text-subtle">No fees, no sign-ups. Just the help you need, when you need it.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">How It Works</h2>
+             <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="accent-bg text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">1</div>
+                    <h3 class="font-bold text-lg mb-2">Describe Your Issue</h3>
+                    <p class="text-subtle text-sm">Use the chat below to explain your tenancy problem in your own words.</p>
+                </div>
+                 <div>
+                    <div class="accent-bg text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">2</div>
+                    <h3 class="font-bold text-lg mb-2">Get Instant Guidance</h3>
+                    <p class="text-subtle text-sm">Our AI analyzes your situation and provides a summary of your rights and the law.</p>
+                </div>
+                 <div>
+                    <div class="accent-bg text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl">3</div>
+                    <h3 class="font-bold text-lg mb-2">Take Action</h3>
+                    <p class="text-subtle text-sm">Choose from suggested next steps, like drafting an email to your landlord or council.</p>
+                </div>
+            </div>
+        </section>
+
+        <main id="main-grid" class="grid grid-cols-1 gap-8 pt-12 border-t border-main">
+            <div class="flex flex-col gap-8">
+                <div class="bg-card p-6 rounded-2xl shadow-lg">
+                    <h2 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-map-marker-alt mr-3 accent-text"></i>Your Location</h2>
+                    <label for="postcode-input" class="block text-sm font-medium text-subtle mb-1">Postcode</label>
+                    <div class="flex items-center">
+                        <input type="text" id="postcode-input" class="w-full bg-primary text-main p-3 border border-main rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="e.g., SW1A 0AA">
+                        <button id="postcode-submit" class="ml-3 p-3 accent-bg text-white rounded-lg hover:opacity-90 transition"><i class="fas fa-check"></i></button>
+                    </div>
+                    <div id="council-output" class="mt-4 p-4 bg-green-900 bg-opacity-50 rounded-lg border border-green-700 hidden"></div>
+                </div>
+
+                <div class="bg-card p-6 rounded-2xl shadow-lg flex-grow flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold flex items-center"><i class="fas fa-comments mr-3 accent-text"></i>Your Guidance Chat</h2>
+                        <button id="clear-chat-btn" class="text-xs text-subtle hover:accent-text transition flex items-center gap-1">
+                            <i class="fas fa-trash"></i> Clear Chat
+                        </button>
+                    </div>
+                    <div id="chat-history" class="flex-grow space-y-4 overflow-y-auto pr-2 h-96"></div>
+                    <div id="loading-indicator" class="hidden my-4 text-center p-4">
+                         <div id="loader-spinner" class="loader ease-linear rounded-full border-4 border-t-4 border-main h-8 w-8 mx-auto mb-4"></div>
+                         <p id="loading-text" class="text-sm text-subtle"></p>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <input type="text" id="chat-input" class="w-full bg-primary text-main p-3 border border-main rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Type your tenancy question here...">
+                        <button id="chat-submit" class="ml-3 p-3 accent-bg text-white rounded-lg hover:opacity-90 transition"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="generated-content-card" class="bg-card p-6 rounded-2xl shadow-lg hidden">
+                <h2 id="generated-content-title" class="text-xl font-bold mb-4 flex items-center"></h2>
+                <div id="generated-content-body" class="p-4 bg-primary rounded-lg text-sm font-mono whitespace-pre-wrap"></div>
+                <div class="mt-4 flex gap-4">
+                    <button id="copy-content-btn" class="w-full flex items-center justify-center gap-2 accent-bg text-white font-bold py-2 px-4 rounded-lg hover:opacity-90 transition">
+                        <i class="fas fa-copy"></i>Copy Content
+                    </button>
+                    <button class="edit-draft-btn w-full flex items-center justify-center gap-2 bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition">
+                         <i class="fas fa-edit"></i>Edit Draft
+                    </button>
+                </div>
+            </div>
+            
+            <div id="quick-actions-card" class="bg-card p-6 rounded-2xl shadow-lg hidden">
+                 <h2 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-bolt mr-3 accent-text"></i>Next Steps</h2>
+                 <div id="quick-actions-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <div id="ai-analysis-card" class="bg-card p-3 rounded-2xl shadow-lg flex justify-between items-center hidden">
+                <p class="text-sm flex items-center"><i class="fas fa-circle-nodes mr-2 text-green-400 animate-pulse"></i>AI Analysis Complete</p>
+                <span id="analysis-confidence-badge" class="bg-green-500 text-green-900 text-xs font-bold px-3 py-1 rounded-full"></span>
+            </div>
+        </main>
+    </div>
+
+    <button id="help-btn" class="fixed bottom-8 right-8 accent-bg hover:opacity-90 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg z-50 transition-transform hover:scale-110">
+        <i class="fas fa-question fa-lg"></i>
+    </button>
+    <div id="help-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-card rounded-2xl shadow-lg p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">Provide Feedback</h2>
+                <button id="close-help-modal-btn" class="text-2xl text-subtle hover:text-main">&times;</button>
+            </div>
+            <div id="feedback-options" class="grid grid-cols-1 gap-3">
+                <button data-feedback-type="Functionality Broken" class="feedback-option-btn bg-primary p-4 rounded-lg text-left hover:bg-opacity-80 border border-main w-full">Functionality Broken</button>
+                <button data-feedback-type="Suggest an Improvement" class="feedback-option-btn bg-primary p-4 rounded-lg text-left hover:bg-opacity-80 border border-main w-full">Suggest an Improvement</button>
+                <button data-feedback-type="Information Incorrect" class="feedback-option-btn bg-primary p-4 rounded-lg text-left hover:bg-opacity-80 border border-main w-full">Information is Incorrect</button>
+                <button data-feedback-type="Something Else" class="feedback-option-btn bg-primary p-4 rounded-lg text-left hover:bg-opacity-80 border border-main w-full">Something Else</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+
+        const SUPABASE_URL = 'https://clupjuazbftwanbmiuls.supabase.co'; 
+        // --- IMPORTANT: PASTE YOUR KEY HERE ---
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsdXBqdWF6YmZ0d2FuYm1pdWxzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3NDA0NzQsImV4cCI6MjA3NDMxNjQ3NH0.si9lYev37cYUB7unzhNsaDmVQHv8iFLNlI2Xjyon7uE'; 
+
+        let supabase;
+        try {
+            supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (error) {
+            console.error("Failed to initialize Supabase client.", error);
+        }
+        
+        const mainGrid = document.getElementById('main-grid');
+        const chatHistoryEl = document.getElementById('chat-history');
+        const chatInput = document.getElementById('chat-input');
+        const chatSubmit = document.getElementById('chat-submit');
+        const clearChatBtn = document.getElementById('clear-chat-btn');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const loadingText = document.getElementById('loading-text');
+        let loadingInterval;
+        const quickActionsCard = document.getElementById('quick-actions-card');
+        const quickActionsContainer = document.getElementById('quick-actions-container');
+        const aiAnalysisCard = document.getElementById('ai-analysis-card');
+        const analysisConfidenceBadge = document.getElementById('analysis-confidence-badge');
+        const generatedContentCard = document.getElementById('generated-content-card');
+        const generatedContentTitle = document.getElementById('generated-content-title');
+        const generatedContentBody = document.getElementById('generated-content-body');
+
+
+        const loadingMessages = [
+            "Analyzing your situation...",
+            "Consulting legal guides and sources...",
+            "Cross-referencing tenancy laws...",
+            "Verifying Information",
+            "Formulating your next steps...",
+        ];
+
+        function startLoadingIndicator() {
+            loadingIndicator.classList.remove('hidden');
+            let messageIndex = 0;
+            loadingText.textContent = loadingMessages[messageIndex];
+            loadingInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                loadingText.textContent = loadingMessages[messageIndex];
+            }, 2500);
+        }
+
+        function stopLoadingIndicator() {
+            loadingIndicator.classList.add('hidden');
+            clearInterval(loadingInterval);
+        }
+
+        let chatMessages = [];
+        
+        const handleChatSubmit = async () => {
+            const userQuery = chatInput.value.trim();
+            if (!userQuery) return;
+
+            appendMessage(userQuery, 'user');
+            chatInput.value = '';
+            startLoadingIndicator();
+
+            try {
+                // The invoke method returns { data, error }
+                const { data: guidance, error } = await getGuidance(userQuery, chatMessages);
+
+                if (error) {
+                    throw new Error(error.message || 'The Edge Function returned an error.');
+                }
+
+                // --- DEFINITIVE FIX ---
+                // Now, `guidance` is the actual JSON object from your function's successful response
+                if (guidance && typeof guidance.text === 'string') {
+                    appendMessage(guidance.text, 'ai', false, guidance.sources);
+                    displayQuickActions(guidance.actions);
+                    if (guidance.analysis && guidance.analysis.confidence) {
+                        analysisConfidenceBadge.textContent = guidance.analysis.confidence;
+                        aiAnalysisCard.classList.remove('hidden');
+                    }
+                } else {
+                    const errorMessage = (guidance && guidance.error) ? guidance.error : 'The AI returned an unexpected response format.';
+                    appendMessage(`Sorry, something went wrong. Details: ${errorMessage}`, 'ai', true);
+                }
+                // --- END FIX ---
+
+            } catch (error) {
+                console.error('Error in handleChatSubmit:', error);
+                let errorMessage = 'Failed to send a request to the Edge Function.';
+                if (error instanceof Error) {
+                    errorMessage = error.message;
+                }
+                 appendMessage(`Sorry, something went wrong. Details: ${errorMessage}`, 'ai', true);
+            } finally {
+                stopLoadingIndicator();
+            }
+        };
+
+        function appendMessage(text, sender, isError = false, sources = [], shouldSave = true) {
+            if (typeof text !== 'string') {
+                console.error("appendMessage called with non-string text:", text);
+                return;
+            }
+
+            if (shouldSave) {
+                chatMessages.push({ text, sender, sources });
+                saveChatHistory();
+            }
+            const messageWrapper = document.createElement('div');
+            messageWrapper.className = `flex flex-col ${sender === 'user' ? 'items-end' : 'items-start'}`;
+            const messageBubble = document.createElement('div');
+            const bubbleClasses = sender === 'user' 
+                ? 'chat-bubble-user text-white' 
+                : (isError ? 'bg-red-900 text-red-300' : 'chat-bubble-ai text-white');
+            messageBubble.className = `p-3 rounded-lg max-w-xl ${bubbleClasses}`;
+            
+            let formattedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, '<br>');
+            messageBubble.innerHTML = formattedText;
+            messageWrapper.appendChild(messageBubble);
+
+            if (sender === 'ai' && !isError) {
+                if (sources && sources.length > 0) {
+                    const sourcesContainer = document.createElement('div');
+                    sourcesContainer.className = 'mt-2 text-xs text-subtle';
+                    sourcesContainer.innerHTML = '<strong>Sources:</strong> ' + sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="underline accent-text">${s.title}</a>`).join(', ');
+                    messageWrapper.appendChild(sourcesContainer);
+                }
+            }
+            chatHistoryEl.appendChild(messageWrapper);
+            chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight; 
+        }
+
+        function displayQuickActions(actions) {
+            quickActionsContainer.innerHTML = '';
+            if (!actions || actions.length === 0) {
+                quickActionsCard.classList.add('hidden');
+                return;
+            }
+            const actionMap = {
+                'email_council': { icon: 'fa-building-columns', text: 'Write an email to Council' },
+                'email_landlord': { icon: 'fa-user-tie', text: 'Write an email to Landlord' },
+                'dispute_message': { icon: 'fa-file-signature', text: 'Write a dispute message' },
+                'step_by_step_guide': { icon: 'fa-list-check', text: 'Provide a step-by-step guide' },
+                'call_council': { icon: 'fa-phone', text: 'Prep for a Call' }
+            };
+            actions.forEach(actionKey => {
+                const action = actionMap[actionKey];
+                if (action) {
+                    const button = document.createElement('button');
+                    button.className = 'bg-primary p-4 rounded-lg text-left hover:bg-opacity-80 border border-main flex items-center';
+                    button.dataset.action = actionKey;
+                    button.innerHTML = `<i class="fas ${action.icon} fa-fw mr-3"></i><span>${action.text}</span>`;
+                    quickActionsContainer.appendChild(button);
+                }
+            });
+            quickActionsCard.classList.remove('hidden');
+        }
+
+        function saveChatHistory() {
+            localStorage.setItem('tenantVoiceChatHistory', JSON.stringify(chatMessages));
+        }
+
+        function loadChatHistory() {
+            const savedHistory = localStorage.getItem('tenantVoiceChatHistory');
+            if (savedHistory) {
+                try {
+                    const parsedHistory = JSON.parse(savedHistory);
+                    if (Array.isArray(parsedHistory)) {
+                        chatMessages = parsedHistory;
+                        chatHistoryEl.innerHTML = '';
+                        chatMessages.forEach(msg => {
+                            if (msg && typeof msg.text === 'string') {
+                                appendMessage(msg.text, msg.sender, false, msg.sources, false)
+                            }
+                        });
+                    }
+                } catch(e) {
+                    console.error("Could not parse chat history", e);
+                    localStorage.removeItem('tenantVoiceChatHistory');
+                }
+            }
+        }
+
+        chatSubmit.addEventListener('click', handleChatSubmit);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChatSubmit(); });
+        clearChatBtn.addEventListener('click', () => {
+             chatMessages = [];
+            localStorage.removeItem('tenantVoiceChatHistory');
+            chatHistoryEl.innerHTML = '';
+            quickActionsCard.classList.add('hidden');
+            generatedContentCard.classList.add('hidden');
+            aiAnalysisCard.classList.add('hidden');
+            mainGrid.className = 'grid grid-cols-1 gap-8';
+        });
+
+        async function getGuidance(query, chatHistory) {
+          // The supabase.functions.invoke method returns an object { data, error }
+          return await supabase.functions.invoke('get-guidance', {
+            body: { query, chatHistory },
+          });
+        }
+
+        async function getGeneratedContent(actionKey, chatHistory) {
+          const { data, error } = await supabase.functions.invoke('get-generated-content', {
+            body: { actionKey, chatHistory },
+          });
+          if (error) throw error;
+          return data;
+        }
+const postcodeSubmit = document.getElementById('postcode-submit');
+const postcodeInput = document.getElementById('postcode-input');
+const councilOutput = document.getElementById('council-output');
+
+// --- START: NEW, IMPROVED CODE FOR index.html ---
+const handlePostcodeSubmit = async () => {
+    const postcode = postcodeInput.value.trim();
+    if (!postcode) {
+        councilOutput.innerHTML = '<p class="text-red-400">Please enter a valid UK postcode.</p>';
+        councilOutput.classList.remove('hidden');
+        return;
+    }
+
+    councilOutput.innerHTML = '<p>Finding your local council...</p>';
+    councilOutput.classList.remove('hidden');
+
+    try {
+        const response = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(postcode)}`);
+        if (!response.ok) {
+            throw new Error('Could not find information for that postcode.');
+        }
+        const data = await response.json();
+
+        if (data.status === 200 && data.result && data.result.admin_district) {
+            const councilName = data.result.admin_district;
+            
+            // --- NEW: Suggested search terms ---
+            const searchTerms = [
+                { key: 'Housing Department', term: `${councilName} council housing department` },
+                { key: 'Tenancy Relations', term: `${councilName} council tenancy relations officer` },
+                { key: 'Environmental Health', term: `${councilName} council environmental health disrepair` },
+                { key: 'Report a Problem', term: `${councilName} council report a problem with landlord` }
+            ];
+
+            const linksHTML = searchTerms.map(item => `
+                <a href="https://www.google.com/search?q=${encodeURIComponent(item.term)}" target="_blank" rel="noopener noreferrer" class="block bg-primary p-3 rounded-lg text-left hover:bg-opacity-80 border border-main w-full mb-2">
+                    <i class="fas fa-search fa-fw mr-2"></i> Find the <strong>${item.key}</strong>
+                </a>
+            `).join('');
+
+            councilOutput.innerHTML = `
+                <p class="font-bold mb-3">Your Local Council is ${councilName}.</p>
+                <p class="text-sm text-subtle mb-4">Use these links to find the right department:</p>
+                ${linksHTML}
+            `;
+            // --- END NEW ---
+
+        } else {
+            throw new Error('Postcode was valid, but no council found.');
+        }
+
+    } catch (error) {
+        councilOutput.innerHTML = `<p class="text-red-400">Error: ${error.message}</p>`;
+    }
+};
+
+postcodeSubmit.addEventListener('click', handlePostcodeSubmit);
+postcodeInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handlePostcodeSubmit();
+});
+// --- START: NEW CODE FOR index.html ---
+quickActionsContainer.addEventListener('click', async (e) => {
+    // Use event delegation to find the button that was clicked
+    const actionButton = e.target.closest('button[data-action]');
+    if (!actionButton) return;
+
+    const actionKey = actionButton.dataset.action;
+    const actionText = actionButton.textContent || "Generated Content";
+
+    // Show loading state
+    quickActionsCard.classList.add('hidden');
+    startLoadingIndicator();
+    generatedContentCard.classList.add('hidden');
+
+    try {
+        // Call the function to get the generated draft/guide
+        const generatedContent = await getGeneratedContent(actionKey, chatMessages);
+
+        if (generatedContent && typeof generatedContent.text === 'string') {
+            // Populate and show the generated content card
+            generatedContentTitle.innerHTML = `<i class="fas fa-file-alt mr-3 accent-text"></i> ${actionText}`;
+            generatedContentBody.textContent = generatedContent.text;
+            generatedContentCard.classList.remove('hidden');
+
+            // Adjust the main grid to show two columns on medium screens and up
+            mainGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 border-t border-main';
+        } else {
+            const errorMessage = (generatedContent && generatedContent.error) ? generatedContent.error : 'The AI returned an unexpected response format for the generated content.';
+            appendMessage(`Sorry, something went wrong. Details: ${errorMessage}`, 'ai', true);
+        }
+    } catch (error) {
+        console.error('Error in getGeneratedContent:', error);
+        appendMessage(`Sorry, there was an error generating the content. Details: ${error.message}`, 'ai', true);
+    } finally {
+        // Hide loading state
+        stopLoadingIndicator();
+    }
+});
+// --- START: NEW CODE FOR index.html ---
+const copyContentBtn = document.getElementById('copy-content-btn');
+const editDraftBtn = document.querySelector('.edit-draft-btn'); // Using a class selector for flexibility
+
+// --- Functionality for the "Copy Content" button ---
+copyContentBtn.addEventListener('click', () => {
+    const textToCopy = generatedContentBody.textContent;
+    if (navigator.clipboard && textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            // Provide user feedback that copy was successful
+            copyContentBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Copied!';
+            setTimeout(() => {
+                copyContentBtn.innerHTML = '<i class="fas fa-copy mr-2"></i> Copy Content';
+            }, 2000); // Revert back after 2 seconds
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+});
+
+// --- Functionality for the "Edit Draft" button ---
+editDraftBtn.addEventListener('click', () => {
+    const isEditable = generatedContentBody.isContentEditable;
+    
+    if (!isEditable) {
+        // Make the content editable
+        generatedContentBody.contentEditable = true;
+        generatedContentBody.focus(); // Automatically focus the editor
+        generatedContentBody.style.outline = '2px solid var(--accent-primary)'; // Add a visual indicator
+        editDraftBtn.innerHTML = '<i class="fas fa-save mr-2"></i> Save Changes';
+    } else {
+        // Make the content non-editable
+        generatedContentBody.contentEditable = false;
+        generatedContentBody.style.outline = 'none'; // Remove the visual indicator
+        editDraftBtn.innerHTML = '<i class="fas fa-edit mr-2"></i> Edit Draft';
+    }
+});
+// --- END: NEW CODE FOR index.html ---
+        loadChatHistory();
+        
+        // ... (Theme switcher and other UI logic)
+        const lightThemeBtn = document.getElementById('light-theme-btn');
+        const darkThemeBtn = document.getElementById('dark-theme-btn');
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                darkThemeBtn.style.backgroundColor = 'var(--accent-bg)';
+                darkThemeBtn.style.color = 'white';
+                lightThemeBtn.style.backgroundColor = 'transparent';
+            } else {
+                lightThemeBtn.style.backgroundColor = 'var(--accent-bg)';
+                lightThemeBtn.style.color = 'white';
+                darkThemeBtn.style.backgroundColor = 'transparent';
+            }
+        }
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) applyTheme(savedTheme); else if (prefersDark) applyTheme('dark'); else applyTheme('light');
+        lightThemeBtn.addEventListener('click', () => applyTheme('light'));
+        darkThemeBtn.addEventListener('click', () => applyTheme('dark'));
+    </script>
+</body>
+</html>
+
